@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 1. Default-deny catch-all para cualquier otra colección no declarada
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper de validación de identificador para mitigar "Resource Poisoning"
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Colección de tiendas asociadas
+    match /stores/{storeId} {
+      allow read: if isValidId(storeId);
+      allow write: if request.auth != null && isValidId(storeId);
+
+      // Subcolección de productos por cada tienda
+      match /products/{productId} {
+        allow read: if isValidId(storeId) && isValidId(productId);
+        allow write: if request.auth != null && isValidId(storeId) && isValidId(productId);
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: Remix: Tienda de Jordan y Base de Datos",
+  "description": "Una tienda interactiva y base de datos de zapatillas Jordan de alta gama con catálogo, carrito de compras, selección de tallas y sección de exploración y edición de la base de datos en tiempo real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

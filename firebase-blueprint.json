@@ -1,0 +1,52 @@
+{
+  "entities": {
+    "Store": {
+      "title": "Store",
+      "description": "Defines an external Cipr1 connected store",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "authToken": { "type": "string" }
+      },
+      "required": ["id", "name", "authToken"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Defines a product synchronized through the SGBD central",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "reference": { "type": "string" },
+        "silhouette": { "type": "string" },
+        "colorway": { "type": "string" },
+        "releaseDate": { "type": "string" },
+        "designer": { "type": "string" },
+        "retailPrice": { "type": "number" },
+        "marketPrice": { "type": "number" },
+        "imageUrl": { "type": "string" },
+        "description": { "type": "string" },
+        "inventory": { "type": "number" },
+        "featured": { "type": "boolean" },
+        "rating": { "type": "number" },
+        "category": { "type": "string" },
+        "catalog": { "type": "string" },
+        "productUrl": { "type": "string" },
+        "technology": { "type": "array" },
+        "images": { "type": "array" }
+      },
+      "required": ["id", "name", "reference", "marketPrice", "inventory"]
+    }
+  },
+  "firestore": {
+    "/stores/{storeId}": {
+      "schema": "Store",
+      "description": "Store connection configurations and credentials"
+    },
+    "/stores/{storeId}/products/{productId}": {
+      "schema": "Product",
+      "description": "Partitioned products collections managed under this SGBD store"
+    }
+  }
+}
